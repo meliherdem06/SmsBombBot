@@ -6,7 +6,7 @@ from colorama import Fore, Style
 
 class SendSms():
     random_mail = ''.join(choice(ascii_lowercase) for i in range(20))
-    adet = 0
+    adet = 1
     def __init__(self, phone):
         self.phone = phone
 
