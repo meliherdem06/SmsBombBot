@@ -64,10 +64,12 @@ while 1:
                 attribute_value = getattr(SendSms, attribute)
                 if callable(attribute_value):
                     if attribute.startswith('__') == False:
-                        if sms.adet >= kere:
+                        if sms.adet > kere:
                             break
                         exec("sms."+attribute+"()")
                         sleep(aralik)
+        print(Fore.LIGHTRED_EX + "\nMenüye dönmek için 'enter' tuşuna basınız..")
+        input()
     elif menu == 2:
         system(clear)
         print(Fore.LIGHTRED_EX + "Çıkış yapılıyor...")
