@@ -1,5 +1,5 @@
 from colorama import Fore
-from request_sms import SendSms
+from sms import SendSms
 from time import sleep
 from os import system
 import platform
