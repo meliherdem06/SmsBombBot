@@ -1,4 +1,5 @@
 from colorama import Fore
+from importlib_metadata import sys
 from sms import SendSms
 from time import sleep
 from os import system
@@ -52,13 +53,14 @@ while 1:
             print(Fore.LIGHTRED_EX + "Hatalı giriş yaptınız. Tekrar deneyiniz.") 
             sleep(3)
             continue
+        system("cls||clear")
         sms = SendSms(str(tel_no))
         while sms.adet < kere:
             for attribute in dir(SendSms):
                 attribute_value = getattr(SendSms, attribute)
                 if callable(attribute_value):
                     if attribute.startswith('__') == False:
-                        if sms.adet > kere:
+                        if sms.adet == kere:
                             break
                         exec("sms."+attribute+"()")
                         sleep(aralik)
