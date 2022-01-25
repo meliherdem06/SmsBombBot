@@ -1,5 +1,4 @@
 from colorama import Fore
-from importlib_metadata import sys
 from sms import SendSms
 from time import sleep
 from os import system
