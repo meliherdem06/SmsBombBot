@@ -1,11 +1,11 @@
-from colorama import Fore
+from colorama import Fore, Style
 from sms import SendSms
 from time import sleep
 from os import system
 
 while 1:
     system("cls||clear")
-    print(Fore.LIGHTCYAN_EX + """
+    print("""{}
      ______                         _     
     |  ____|                       | |    
     | |__   _ __   ___  _   _  __ _| |__  
@@ -14,7 +14,9 @@ while 1:
     |______|_| |_|\___/ \__,_|\__, |_| |_|
                                __/ |      
                               |___/      
-    """)
+                            
+                        {}by {}@_tingirifistik  
+    """.format(Fore.LIGHTCYAN_EX, Style.RESET_ALL, Fore.LIGHTRED_EX))
     try:
         menu = int(input(Fore.LIGHTMAGENTA_EX + "1. SMS Gönder\n2. Çıkış\n\n" + Fore.LIGHTYELLOW_EX + "Seçim: "))
     except ValueError:
