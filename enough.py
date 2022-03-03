@@ -70,5 +70,4 @@ while 1:
     elif menu == 2:
         system("cls||clear")
         print(Fore.LIGHTRED_EX + "Çıkış yapılıyor...")
-        sleep(2)
         break
