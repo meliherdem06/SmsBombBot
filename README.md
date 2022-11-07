@@ -3,9 +3,8 @@
 [![Github Stars](https://img.shields.io/github/stars/tingirifistik/Enough)]()
 [![Github Forks](https://img.shields.io/github/forks/tingirifistik/Enough)]()
 
-![menu](https://user-images.githubusercontent.com/51286195/200385853-92c66d0a-0bb8-4b14-8aa4-211584f08d75.PNG)
-
-![send](https://user-images.githubusercontent.com/51286195/200385895-b961e021-01d6-4c86-b728-cf144f8c77f9.PNG)
+<img src=https://user-images.githubusercontent.com/51286195/200389355-b3eb9324-f92b-4342-b3a5-b73cbf5e0f6b.PNG width="700" height="350"/>
+<img src=https://user-images.githubusercontent.com/51286195/200389361-34e1981f-ed06-4dac-ae58-3386d029c6d6.PNG width="700" height="700"/>
 
 ### Kurulum
 
