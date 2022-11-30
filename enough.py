@@ -26,7 +26,7 @@ while 1:
                                __/ |      
                               |___/      
                             
-                        {}by {}@_tingirifistik  
+                        {}by {}@tingirifistik  
     """.format(Fore.LIGHTCYAN_EX, Style.RESET_ALL, Fore.LIGHTRED_EX))
     try:
         menu = int(input(Fore.LIGHTMAGENTA_EX + "1. SMS Gönder\n2. Çıkış\n\n" + Fore.LIGHTYELLOW_EX + "Seçim: "))
