@@ -8,14 +8,14 @@
             "required": true
         },
         "SAHIP": {
-            "description": "Telefon Numaranız(Size SMS gelmemesi için)",
+            "description": "Size SMS gelmemesi için telefon numaranız",
             "required": false
         }
     },
     "formation": {
     "worker": {
       "quantity": 1,
-      "size": "free"
+      "size": "eco"
     }
   },
     "buildpacks": [
