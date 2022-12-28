@@ -7,7 +7,7 @@ with open("sms.py", "r", encoding="utf-8") as f:
 if read == r:
     pass
 else:
-    print(Fore.RED + "Güncelleme yapılıyor...")
+    print("Güncelleme yapılıyor...")
     with open("sms.py", "w", encoding="utf-8") as f:
         f.write(r)
 from sms import SendSms
