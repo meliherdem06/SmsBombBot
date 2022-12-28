@@ -28,7 +28,6 @@ def getUpdate():
 def sendMessage(text, id):
     requests.get(f"https://api.telegram.org/bot{token}/sendMessage?chat_id={id}&text=" + text, timeout=3)
     
-    
 date_list = []
 while 1:
     try:
@@ -87,8 +86,7 @@ while 1:
                 sleep(1)      
         elif text == "/start" and date not in date_list:
             date_list.append(date)
-            sendMessage("Merhaba!\nBirilerini rahatsız etmek istiyorsan doğru yere geldin.\n'/sms' komutu ile sms göndermeye başlayabilirsin\nİyi eğlenceler!\n\nKaynak kodu:https://github.com/tingirifistik/Enough\nTwitter: @_tingirifistik\n\n ", id)
-        
+            sendMessage("Merhaba!\nBirilerini rahatsız etmek istiyorsan doğru yere geldin.\n'/sms' komutu ile sms göndermeye başlayabilirsin\nİyi eğlenceler!\n\nKaynak kodu:https://github.com/tingirifistik/Enough\nTwitter: @_tingirifistik\n\n ", id)        
         elif text != "/sms" and text != "/start" and date not in date_list:
             date_list.append(date)
             sendMessage("Yazdığınızı anlayamadım.", id)
