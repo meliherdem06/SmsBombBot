@@ -77,10 +77,14 @@ while 1:
                                         except ValueError:
                                             date_list.append(date)
                                             sendMessage("Lütfen sayısal değer giriniz.", id)
+                                    sleep(1)
                             except ValueError:
                                 date_list.append(date)
                                 sendMessage("Lütfen sayısal değer giriniz.", id)
-                        
+                            break
+                        sleep(1)
+                    break
+                sleep(1)      
         elif text == "/start" and date not in date_list:
             date_list.append(date)
             sendMessage("Merhaba!\nBirilerini rahatsız etmek istiyorsan doğru yere geldin.\n'/sms' komutu ile sms göndermeye başlayabilirsin\nİyi eğlenceler!\n\nKaynak kodu:https://github.com/tingirifistik/Enough\nTwitter: @_tingirifistik\n\n ", id)
@@ -88,5 +92,6 @@ while 1:
         elif text != "/sms" and text != "/start" and date not in date_list:
             date_list.append(date)
             sendMessage("Yazdığınızı anlayamadım.", id)
+        sleep(1)
     except:
-        pass
+        sleep(1)
