@@ -1,8 +1,7 @@
-from colorama import Fore, Style
+import requests
 from time import sleep
-from os import system
-from requests import get
-r = get("https://raw.githubusercontent.com/tingirifistik/Enough/main/sms.py").text
+from os import environ
+r = requests.get("https://raw.githubusercontent.com/tingirifistik/Enough/main/sms.py").text
 with open("sms.py", "r", encoding="utf-8") as f:
     read = f.read()
 if read == r:
@@ -13,71 +12,81 @@ else:
         f.write(r)
 from sms import SendSms
 
+token = environ.get('TOKEN')
+
+def getUpdate():
+    url = 'https://api.telegram.org/bot{}/getUpdates'.format(token)
+    r = requests.get(url)
+    x = 0
+    while 1 :
+        try:
+            r.json()["result"][x]
+            x+=1
+        except IndexError:
+            return (r.json()["result"][x-1]["message"]["chat"]["id"]), r.json()["result"][x-1]["message"]["text"], (r.json()["result"][x-1]["message"]["date"])
+
+def sendMessage(text, id):
+    requests.get(f"https://api.telegram.org/bot{token}/sendMessage?chat_id={id}&text=" + text, timeout=3)
+    
+    
+date_list = []
 while 1:
-    system("cls||clear")
-    print("""{}
-     ______                         _     
-    |  ____|                       | |    
-    | |__   _ __   ___  _   _  __ _| |__  
-    |  __| | '_ \ / _ \| | | |/ _` | '_ \ 
-    | |____| | | | (_) | |_| | (_| | | | |
-    |______|_| |_|\___/ \__,_|\__, |_| |_|
-                               __/ |      
-                              |___/      
-                            
-                        {}by {}@tingirifistik  
-    """.format(Fore.LIGHTCYAN_EX, Style.RESET_ALL, Fore.LIGHTRED_EX))
     try:
-        menu = int(input(Fore.LIGHTMAGENTA_EX + "1. SMS Gönder\n2. Çıkış\n\n" + Fore.LIGHTYELLOW_EX + "Seçim: "))
-    except ValueError:
-        system("cls||clear")
-        print(Fore.LIGHTRED_EX + "Hatalı giriş yaptınız. Tekrar deneyiniz.")
-        sleep(3)
-        continue
-    if menu == 1:
-        system("cls||clear")
-        try:
-            print(Fore.LIGHTYELLOW_EX + "Telefon numarasını başında '+90' olmadan yazınız: "+ Fore.LIGHTGREEN_EX, end="")
-            tel_no = int(input())
-            if len(str(tel_no)) != 10:
-                raise ValueError
-        except ValueError:
-            system("cls||clear")
-            print(Fore.LIGHTRED_EX + "Hatalı telefon numarası. Tekrar deneyiniz.") 
-            sleep(3)
-            continue
-        system("cls||clear")
-        try:
-            print(Fore.LIGHTYELLOW_EX + "Kaç adet SMS göndermek istiyorsun: "+ Fore.LIGHTGREEN_EX, end="")
-            kere = int(input())
-        except ValueError:
-            system("cls||clear")
-            print(Fore.LIGHTRED_EX + "Hatalı giriş yaptınız. Tekrar deneyiniz.") 
-            sleep(3)
-            continue
-        system("cls||clear")
-        try:
-            print(Fore.LIGHTYELLOW_EX + "Kaç saniye aralıkla göndermek istiyorsun: "+ Fore.LIGHTGREEN_EX, end="")
-            aralik = int(input())
-        except ValueError:
-            system("cls||clear")
-            print(Fore.LIGHTRED_EX + "Hatalı giriş yaptınız. Tekrar deneyiniz.") 
-            sleep(3)
-            continue
-        system("cls||clear")
-        sms = SendSms(str(tel_no))
-        while sms.adet < kere:
-            for attribute in dir(SendSms):
-                attribute_value = getattr(SendSms, attribute)
-                if callable(attribute_value):
-                    if attribute.startswith('__') == False:
-                        if sms.adet == kere:
-                            break
-                        exec("sms."+attribute+"()")
-                        sleep(aralik)
-        print(Fore.LIGHTRED_EX + "\nMenüye dönmek için 'enter' tuşuna basınız..")
-        input()
-    elif menu == 2:
-        system("cls||clear")
-        print(Fore.LIGHTRED_EX + "Çıkış yapılıyor...")
-        break
+        id, text, date = getUpdate()
+        if text == "/sms" and date not in date_list:
+            date_list.append(date)
+            sendMessage("SMS göndermek istediğiniz numarayı %2B90 olmadan yazınız.", id)
+            while True:
+                id, text, date = getUpdate()
+                if len(text) != 10 and date not in date_list:
+                    date_list.append(date)
+                    sendMessage("Lütfen 10 haneli telefon numarası giriniz.", id)
+                elif text == environ.get('SAHIP') and date not in date_list:
+                    date_list.append(date)
+                    sendMessage("Bu önemli şahsiyeti rahatsız etmek istemiyorum.\nFarklı telefon numarası yazınız!", id)
+                elif len(text) == 10 and date not in date_list:
+                    date_list.append(date)
+                    telno = text
+                    sendMessage("Kaç adet SMS göndermek istiyorsunuz?", id)
+                    while 1:
+                        id, text, date = getUpdate()
+                        if date not in date_list:
+                            try:
+                                intcheck_adet = int(text)
+                                date_list.append(date)
+                                sendMessage("Kaç saniye aralıklarla göndermek istiyorsunuz?", id)
+                                while 1:
+                                    id, text, date = getUpdate()
+                                    if date not in date_list:
+                                        try:
+                                            intcheck_saniye = int(text)
+                                            date_list.append(date)
+                                            sendMessage(f"{intcheck_adet} adet SMS {intcheck_saniye} saniye aralıklarla gönderiliyor...", id)
+                                            sms = SendSms(telno)
+                                            while sms.adet < intcheck_adet:
+                                                for attribute in dir(SendSms):
+                                                    attribute_value = getattr(SendSms, attribute)
+                                                    if callable(attribute_value):
+                                                        if attribute.startswith('__') == False:
+                                                            if sms.adet == intcheck_adet:
+                                                                break
+                                                            exec("sms."+attribute+"()")
+                                                            sleep(intcheck_saniye)
+                                            sendMessage(telno+" --> "+str(sms.adet)+" adet SMS gönderildi.", id)
+                                            break
+                                        except ValueError:
+                                            date_list.append(date)
+                                            sendMessage("Lütfen sayısal değer giriniz.", id)
+                            except ValueError:
+                                date_list.append(date)
+                                sendMessage("Lütfen sayısal değer giriniz.", id)
+                        
+        elif text == "/start" and date not in date_list:
+            date_list.append(date)
+            sendMessage("Merhaba!\nBirilerini rahatsız etmek istiyorsan doğru yere geldin.\n'/sms' komutu ile sms göndermeye başlayabilirsin\nİyi eğlenceler!\n\nKaynak kodu:https://github.com/tingirifistik/Enough\nTwitter: @_tingirifistik\n\n ", id)
+        
+        elif text != "/sms" and text != "/start" and date not in date_list:
+            date_list.append(date)
+            sendMessage("Yazdığınızı anlayamadım.", id)
+    except:
+        pass
