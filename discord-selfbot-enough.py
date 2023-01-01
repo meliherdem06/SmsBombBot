@@ -13,7 +13,7 @@ else:
 from sms import SendSms
 
 token = "" #bot olarak kullanmak istediğiniz hesabın Discord token'i.
-chat_id =  "" #sohbet id'si (int)
+chat_id =   #sohbet id'si (int)
 
 def getHeaders(token=None, content_type="application/json"):
     header = {
