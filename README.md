@@ -7,6 +7,10 @@
 <img src=https://user-images.githubusercontent.com/51286195/209442235-7069b8e7-b3f3-4b70-82cb-a86014836be0.png height="200px" width="400px"/>
 
 
+<h2>Replit</h2>
+
+https://replit.com/@tingirifistik/Enough?v=1
+
 <h2>Kurulum</h2>
 
 ```console
@@ -15,6 +19,7 @@ cd Enough
 pip3 install -r requirements.txt
 python3 enough.py
 ```
+
 <h2>Telegram Bot'u ile Kullanmak İçin</h2>
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/tingirifistik/Enough)
