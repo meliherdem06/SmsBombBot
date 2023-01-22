@@ -82,13 +82,18 @@ while 1:
             continue
         system("cls||clear")
         try:
-            print(Fore.LIGHTYELLOW_EX + "Kaç adet SMS göndermek istiyorsun: "+ Fore.LIGHTGREEN_EX, end="")
-            kere = int(input())
+            print(Fore.LIGHTYELLOW_EX + "Kaç adet SMS göndermek istiyorsun (sonsuz ise 'enter' bas): "+ Fore.LIGHTGREEN_EX, end="")
+            kere = input()
+            if kere:
+                kere = int(kere)
+            else:
+                kere = None
         except ValueError:
             system("cls||clear")
             print(Fore.LIGHTRED_EX + "Hatalı giriş yaptınız. Tekrar deneyiniz.") 
             sleep(3)
             continue
+
         system("cls||clear")
         try:
             print(Fore.LIGHTYELLOW_EX + "Kaç saniye aralıkla göndermek istiyorsun: "+ Fore.LIGHTGREEN_EX, end="")
@@ -100,17 +105,26 @@ while 1:
             continue
         system("cls||clear")
         sms = SendSms(tel_no, mail)
-        while sms.adet < kere:
-            for attribute in dir(SendSms):
-                attribute_value = getattr(SendSms, attribute)
-                if callable(attribute_value):
-                    if attribute.startswith('__') == False:
-                        if sms.adet == kere:
-                            break
-                        exec("sms."+attribute+"()")
-                        sleep(aralik)
-        print(Fore.LIGHTRED_EX + "\nMenüye dönmek için 'enter' tuşuna basınız..")
-        input()
+        if isinstance(kere, int):
+                  while sms.adet < kere:
+                      for attribute in dir(SendSms):
+                          attribute_value = getattr(SendSms, attribute)
+                          if callable(attribute_value):
+                              if attribute.startswith('__') == False:
+                                  if sms.adet == kere:
+                                      break
+                                  exec("sms."+attribute+"()")
+                                  sleep(aralik)
+                  print(Fore.LIGHTRED_EX + "\nMenüye dönmek için 'enter' tuşuna basınız..")
+                  input()
+        elif kere is None: 
+                  while True:
+                      for attribute in dir(SendSms):
+                          attribute_value = getattr(SendSms, attribute)
+                          if callable(attribute_value):
+                              if attribute.startswith('__') == False:
+                               exec("sms."+attribute+"()")
+                               sleep(aralik)
     elif menu == 2:
         system("cls||clear")
         try:
