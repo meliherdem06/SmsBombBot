@@ -9,7 +9,7 @@
 
 <h2>Replit</h2>
 
-https://replit.com/@tingirifistik/Enough?v=1
+https://replit.com/@tingirifistik/Enough
 
 <h2>Kurulum</h2>
 
